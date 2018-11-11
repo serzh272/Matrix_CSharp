@@ -1,0 +1,55 @@
+﻿<Window x:Class="WpfApp1.MatrWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:my_controls="clr-namespace:WpfCustomControlLibrary;assembly=WpfCustomControlLibrary"
+        mc:Ignorable="d"
+        Title="Матрицы" Height="700" Width="858" MinHeight="650" MinWidth="900" MaxHeight="700" MaxWidth="900" ResizeMode="NoResize">
+    <Grid Margin="0,0,4,0">
+        <Rectangle Fill="#FFC5C5C5" HorizontalAlignment="Left" Height="400" VerticalAlignment="Top" Width="400" Margin="10,50,0,0"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="400" VerticalAlignment="Top" Width="400" Margin="10,50,0,0">
+            <Grid x:Name="Matr1Grid" Width="400" Height="400" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-1"/>
+        </Border>
+        <Rectangle Fill="#FFC5C5C5" Height="400" VerticalAlignment="Top" Margin="0,49,2,0" HorizontalAlignment="Right" Width="400"/>
+        <Border BorderBrush="Black" BorderThickness="1" Height="400" VerticalAlignment="Top" Margin="0,49,2,0" HorizontalAlignment="Right" Width="400">
+            <Grid x:Name="Matr2Grid" Width="399" Height="399" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-1,0,0,-1"/>
+        </Border>
+        <Label Content="Матрица1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" HorizontalContentAlignment="Center"/>
+        <Label Content="Матрица2" HorizontalAlignment="Right" Margin="0,12,288,0" VerticalAlignment="Top" Width="114" HorizontalContentAlignment="Center"/>
+        <Grid HorizontalAlignment="Left" Height="24" Margin="115,456,0,0" VerticalAlignment="Top" Width="170">
+            <my_controls:Spinner x:Name="Sp1_1Txt" HorizontalAlignment="Left" TextWrapping="Wrap" Text="3" Width="74" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="Sp1_1Txt_TextChanged" FontSize="14" minVal="1" maxVal="10"/>
+            <my_controls:Spinner x:Name="Sp1_2Txt" TextWrapping="Wrap" Text="3" HorizontalAlignment="Right" Width="74" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="Sp1_2Txt_TextChanged" FontSize="14" minVal="1" maxVal="10"/>
+            <TextBlock HorizontalAlignment="Left" Margin="82,3,0,3" TextWrapping="Wrap" Text="X" Width="7"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="24" Margin="600,456,0,0" VerticalAlignment="Top" Width="176">
+            <my_controls:Spinner x:Name="Sp2_1Txt" HorizontalAlignment="Left" TextWrapping="Wrap" Text="3" Width="74" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="Sp2_1Txt_TextChanged" FontSize="14" minVal="1" maxVal="10"/>
+            <my_controls:Spinner x:Name="Sp2_2Txt" TextWrapping="Wrap" Text="3" HorizontalAlignment="Right" Width="74" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="Sp2_2Txt_TextChanged" FontSize="14" minVal="1" maxVal="10"/>
+            <TextBlock HorizontalAlignment="Left" Margin="84,3,0,3" TextWrapping="Wrap" Text="X" Width="7"/>
+        </Grid>
+        <Button x:Name="SwapMatr" Content="&lt;-&gt;" Height="30" Margin="415,182,0,0" VerticalAlignment="Top" Background="#FF87D4F7" Click="SwapMatr_Click" HorizontalAlignment="Left" Width="60"/>
+        <Button x:Name="btnPlus" Content="+" Height="30" Margin="415,218,0,0" VerticalAlignment="Top" Background="#FF87D4F7" Click="btnPlus_Click" HorizontalAlignment="Left" Width="60"/>
+        <Button x:Name="btnMunus" Content="-" Height="30" Margin="415,252,0,0" VerticalAlignment="Top" Background="#FF87D4F7" Click="btnMunus_Click" HorizontalAlignment="Left" Width="60"/>
+        <Button x:Name="btnMult" Content="*" Height="30" Margin="415,288,0,0" VerticalAlignment="Top" Background="#FF87D4F7" Click="btnMult_Click" HorizontalAlignment="Left" Width="60"/>
+        <Button x:Name="btnObrMatr" Content="обратная матрица" Height="30" Margin="10,491,0,0" VerticalAlignment="Top" Background="#FF87D4F7" FontSize="10" FontWeight="Bold" Click="btnObrMatr_Click" HorizontalAlignment="Left" Width="115"/>
+        <Button x:Name="btnDnTrMatr" Content="нижняя треугольная" Height="30" Margin="130,491,0,0" VerticalAlignment="Top" Background="#FF87D4F7" FontSize="10" FontWeight="Bold" Click="btnDnTrMatr_Click" HorizontalAlignment="Left" Width="129"/>
+        <Button x:Name="btnUpTrMatr" Content="верхняя треугольная" Height="30" Margin="264,490,0,0" VerticalAlignment="Top" Background="#FF87D4F7" FontSize="10" FontWeight="Bold" Click="btnUpTrMatr_Click" HorizontalAlignment="Left" Width="146"/>
+        <Button x:Name="btnFrobMatr" Content="матрица Фробениуса" Height="30" Margin="10,526,0,0" VerticalAlignment="Top" Background="#FF87D4F7" FontSize="10" FontWeight="Bold" Click="btnFrobMatr_Click" HorizontalAlignment="Left" Width="115"/>
+        <Button x:Name="TransponseM1" Content="транспонировать" Height="30" Margin="130,526,0,0" VerticalAlignment="Top" Background="#FF87D4F7" FontSize="10" FontWeight="Bold" Click="TransponseM1_Click" HorizontalAlignment="Left" Width="129"/>
+        <Button x:Name="ClearM1" Content="очистить" Height="30" Margin="130,561,0,0" VerticalAlignment="Top" Background="#FFEE6E8B" FontWeight="Bold" Click="ClearM1_Click" HorizontalAlignment="Left" Width="129"/>
+        <Button x:Name="SystUr" Content="метод Гаусса" Height="29" Margin="488,491,0,0" VerticalAlignment="Top" Background="#FF87D4F7" FontWeight="Bold" Click="SystUr_Click" HorizontalAlignment="Left" Width="159"/>
+        <Button x:Name="SobstChisla" Content="собственные числа" Height="30" Margin="264,526,0,0" VerticalAlignment="Top" Background="#FF87D4F7" FontSize="10"  FontWeight="Bold" HorizontalAlignment="Left" Width="146" Click="SobstChisla_Click"/>
+        <TextBox x:Name="Det1" HorizontalAlignment="Left" TextWrapping="Wrap" Width="175" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="Sp1_1Txt_TextChanged" Margin="235,12,0,0" Height="24" VerticalAlignment="Top"/>
+        <TextBox x:Name="Det2" TextWrapping="Wrap" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="Sp1_1Txt_TextChanged" Margin="0,12,2,0" HorizontalAlignment="Right" Width="175" Height="24" VerticalAlignment="Top"/>
+        <Button x:Name="btnDet1" Content="определитель" Height="24" Margin="130,12,0,0" VerticalAlignment="Top" Background="#FF87D4F7" FontWeight="Bold" Click="btnDet1_Click" HorizontalAlignment="Left" Width="96"/>
+        <Button x:Name="btnDet2" Content="определитель" Height="24" Margin="0,12,187,0" VerticalAlignment="Top" Background="#FF87D4F7" FontWeight="Bold" Click="btnDet2_Click" HorizontalAlignment="Right" Width="96"/>
+        <Button x:Name="btnGCircle" Content="круги Гершгорина" Height="30" Margin="10,561,0,0" VerticalAlignment="Top" Background="#FF87D4F7" FontSize="10" FontWeight="Bold" Click="btnGCircle_Click" HorizontalAlignment="Left" Width="115"/>
+        <Button x:Name="SystUr_simple" Content="метод простой итерации " Height="30" Margin="488,526,0,0" VerticalAlignment="Top" Background="#FF87D4F7" FontWeight="Bold" Click="SystUr_simple_Click" HorizontalAlignment="Left" Width="159"/>
+        <my_controls:Spinner x:Name="SimpleIterTxt" HorizontalAlignment="Left" TextWrapping="Wrap" Text="0" Width="74" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" minVal="0" maxVal="20" Margin="652,526,0,115"/>
+        <TextBox x:Name="eps" HorizontalAlignment="Left" Height="30" Margin="731,526,0,0" TextWrapping="Wrap" Text="0.01" VerticalAlignment="Top" Width="157" FontSize="14" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="lambda" HorizontalAlignment="Left" Height="30" Margin="264,559,0,0" TextWrapping="Wrap" Text="0.01" VerticalAlignment="Top" Width="146" FontSize="14" VerticalContentAlignment="Center"/>
+        <Button x:Name="SystUr_Orto" Content="метод ортогонализации" Height="29" Margin="488,562,0,0" VerticalAlignment="Top" Background="#FF87D4F7" FontWeight="Bold" Click="SystUr_Orto_Click" HorizontalAlignment="Left" Width="159"/>
+        <CheckBox x:Name="isDbl" Content="Использовать десятичные дроби" HorizontalAlignment="Left" Margin="10,596,0,0" VerticalAlignment="Top" Width="249" Height="19" Checked="isDbl_Checked" Unchecked="isDbl_Unchecked"/>
+    </Grid>
+</Window>
