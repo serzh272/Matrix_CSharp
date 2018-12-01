@@ -97,10 +97,9 @@ namespace WpfApp1
                     for (int i = 1; i < this.NRow - j + 1; i++)
                     {
                         
-                        fr1.FractTxt = MyFuncs.convertToFract(this.txtBxs[i, j - 1].Text);
-                        fr2.FractTxt = MyFuncs.convertToFract(this.txtBxs[i + 1, j - 1].Text);
+                        fr1 = this.matr.A[i, j - 1].CopyFr;
+                        fr2 = this.matr.A[i + 1, j - 1].CopyFr;
                         this.matr.A[i, j] = fr2 - fr1;
-                        this.matr.Ad[i, j] = fr2.ToDouble() - fr1.ToDouble();
                         this.txtBxs[i, j].Text = this.matr.A[i, j].FractTxt;
                     }
                 }
@@ -117,10 +116,10 @@ namespace WpfApp1
             {
                 for (int i = 1; i < this.NRow - j + 1; i++)
                 {
-                    fr1.FractTxt = this.txtBxs[i, j - 1].Text;
-                    fr2.FractTxt = this.txtBxs[i + 1, j - 1].Text;
-                    x0.FractTxt = this.txtBxs[i, 0].Text;
-                    x1.FractTxt = this.txtBxs[i + j - 1, 0].Text;
+                    fr1 = this.matr.A[i, j - 1].CopyFr;
+                    fr2 = this.matr.A[i + 1, j - 1].CopyFr;
+                    x0 = this.matr.A[i, 0].CopyFr;
+                    x1 = this.matr.A[i + j - 1, 0].CopyFr;
                     this.txtBxs[i, j].Text = ((fr2 - fr1) / (x1 - x0)).FractTxt;
                 }
             }            
@@ -132,15 +131,13 @@ namespace WpfApp1
             Fraction yfrMin = new Fraction();
             Fraction xfrMax = new Fraction();
             Fraction yfrMax = new Fraction();
-            //Fraction xfr0 = new Fraction((int)((gr.Width-20) / 2), 1);
-            //Fraction yfr0 = new Fraction((int)((gr.Height-20) / 2), 1);            
-            xfrMin.FractTxt = this.txtBxs[1, 0].Text;
-            yfrMin.FractTxt = this.txtBxs[1, 1].Text;
+            xfrMin = this.matr.A[1, 0].CopyFr;
+            yfrMin = this.matr.A[1, 1].CopyFr;
             //double yMin = yfrMin.ToDouble();
             Fraction h = new Fraction();
-            xfrMax.FractTxt = this.txtBxs[this.NRow - 1, 0].Text;
+            xfrMax = this.matr.A[this.NRow - 1, 0].CopyFr;
             //double xMax = xfrMax.ToDouble();
-            yfrMax.FractTxt = this.txtBxs[this.NRow - 1, 1].Text;
+            yfrMax = this.matr.A[this.NRow - 1, 1].CopyFr;
             for (Fraction i = xfrMin; i <= xfrMax; i += (xfrMax - xfrMin) / res)
             {
                 if (GetPolyNewtonVal(i, por, row) >= yfrMax)
@@ -305,14 +302,14 @@ namespace WpfApp1
             Fraction yfrMax = new Fraction();
             //Fraction xfr0 = new Fraction((int)((gr.Width - 20) / 2), 1);
             //Fraction yfr0 = new Fraction((int)((gr.Height - 20) / 2), 1);
-            xfrMin.FractTxt = this.txtBxs[1, 0].Text;
+            xfrMin = this.matr.A[1, 0].CopyFr;
             //yfrMin.FractTxt = this.txtBxs[1, 1].Text;
             //double yMin = yfrMin.ToDouble();
             Fraction h = new Fraction();
-            xfrMax.FractTxt = this.txtBxs[this.NRow - 1, 0].Text;
+            xfrMax = this.matr.A[this.NRow - 1, 0].CopyFr;
             //double xMax = xfrMax.ToDouble();
-            yfrMax.FractTxt = this.txtBxs[this.NRow - 1, 1].Text;
-            yfrMin.FractTxt = this.txtBxs[1, 1].Text;
+            yfrMax = this.matr.A[this.NRow - 1, 1].CopyFr;
+            yfrMin = this.matr.A[1, 1].CopyFr;
             for (Fraction i = xfrMin; i <= xfrMax; i += (xfrMax - xfrMin) / 50)
             {
                 if (GetPolyNewtonVal(i, por, row) >= yfrMax)
@@ -360,14 +357,14 @@ namespace WpfApp1
             Fraction m = new Fraction();
             Fraction l = new Fraction();
             Fraction k = new Fraction();
-            m.FractTxt = this.txtBxs[1, 0].Text;
-            l.FractTxt = this.txtBxs[this.NRow - 1, 0].Text;
+            m = this.matr.A[1, 0].CopyFr;
+            l = this.matr.A[this.NRow - 1, 0].CopyFr;
             l -= m;
             l /= (this.NRow - 2);
             for (int i = 1; i < this.NRow - 1; i++)
             {
-                m.FractTxt = this.txtBxs[i, 0].Text;
-                k.FractTxt = this.txtBxs[i + 1, 0].Text;
+                m = this.matr.A[i, 0].CopyFr;
+                k = this.matr.A[i + 1, 0].CopyFr;
                 if (l != (k - m))
                 {
                     ravn = false;
@@ -403,8 +400,8 @@ namespace WpfApp1
             if (isRavnom())
             {
                 Fraction h = new Fraction();
-                m.FractTxt = this.txtBxs[1, 0].Text;
-                k.FractTxt = this.txtBxs[2, 0].Text;
+                m = this.matr.A[1, 0].CopyFr;
+                k = this.matr.A[2, 0].CopyFr;
                 h = k - m;
                 if (poryadok >= this.NRow - row - 1)
                 {
@@ -414,7 +411,7 @@ namespace WpfApp1
                 {
                     m.FractTxt = "" + MyFuncs.factorial(i);
                     m *= h.Power(i);
-                    l.FractTxt = this.txtBxs[row, i + 1].Text;
+                    l = this.matr.A[row, i + 1].CopyFr;
                     l /= m;
                     //str += "+" + l.FractTxt;
                     str += (l < 0?"":"+") + l.FractTxt;
@@ -435,7 +432,7 @@ namespace WpfApp1
                 }
                 for (int i = 1; i <= poryadok; i++)
                 {
-                    l.FractTxt = this.txtBxs[row, i + 1].Text;
+                    l = this.matr.A[row, i + 1].CopyFr;
                     str += (l < 0 ? "" : "+") + l.FractTxt;
                     proizv = "";
                     for (int j = 1; j < i + 1; j++)
@@ -452,7 +449,7 @@ namespace WpfApp1
         public Fraction GetPolyNewtonVal(Fraction fr, int poryadok, int row = 1)
         {            
             Fraction rez = new Fraction();
-            rez.FractTxt = this.txtBxs[row, 1].Text;
+            rez = this.matr.A[row, 1].CopyFr;
             Fraction m = new Fraction(1, 1);
             Fraction n = new Fraction(1, 1);
             Fraction l = new Fraction(1, 1);
@@ -464,20 +461,20 @@ namespace WpfApp1
             if (isRavnom())
             {
                 Fraction h = new Fraction();
-                m.FractTxt = this.txtBxs[1, 0].Text;
-                k.FractTxt = this.txtBxs[2, 0].Text;
+                m = this.matr.A[1, 0].CopyFr;
+                k = this.matr.A[2, 0].CopyFr;
                 h = k - m;
                 
                 for (int i = 1; i <= poryadok; i++)
                 {
                     m.FractTxt = "" + MyFuncs.factorial(i);
                     m *= h.Power(i);
-                    l.FractTxt = this.txtBxs[row, i + 1].Text;
+                    l = this.matr.A[row, i + 1].CopyFr;
                     l /= m;
                     n.FractTxt = "1";
                     for (int j = 1; j < i + 1; j++)
                     {
-                        k.FractTxt = this.txtBxs[j + row - 1, 0].Text;
+                        k = this.matr.A[j + row - 1, 0].CopyFr;
                         n *= (fr - k);
                     }
                     rez += l * n;
@@ -487,11 +484,11 @@ namespace WpfApp1
             {
                 for (int i = 1; i <= poryadok; i++)
                 {
-                    l.FractTxt = this.txtBxs[row, i + 1].Text;
+                    l = this.matr.A[row, i + 1].CopyFr;
                     n.FractTxt = "1";
                     for (int j = 1; j < i + 1; j++)
                     {
-                        k.FractTxt = this.txtBxs[j + row - 1, 0].Text;
+                        k = this.matr.A[j + row - 1, 0].CopyFr;
                         n *= (fr - k);
                     }
                     rez += l * n;
@@ -512,13 +509,13 @@ namespace WpfApp1
             }
             if (isRavnom())
             {
-                q.FractTxt = this.txtBxs[1, 0].Text;
-                h.FractTxt = this.txtBxs[2, 0].Text;
+                q = this.matr.A[1, 0].CopyFr;
+                h = this.matr.A[2, 0].CopyFr;
                 h -= q;
-                q.FractTxt = this.txtBxs[row, 0].Text;
+                q = this.matr.A[row, 0].CopyFr;
                 q = (fr - q) / h;
                 qM.FractTxt = q.FractTxt;
-                y1.FractTxt = this.txtBxs[row, poryadok+2].Text;
+                y1 = this.matr.A[row, poryadok+2].CopyFr;
                 for (int i = 1; i <= poryadok; i++)
                 {
                     qM *= (q - i);
@@ -553,41 +550,41 @@ namespace WpfApp1
                 Fraction l4 = new Fraction();
                 Fraction l5 = new Fraction();                
                 Fraction h = new Fraction();
-                q.FractTxt = this.txtBxs[1, 0].Text;
-                h.FractTxt = this.txtBxs[2, 0].Text;
+                q = this.matr.A[1, 0].CopyFr;
+                h = this.matr.A[2, 0].CopyFr;
                 h -= q;
-                q.FractTxt = this.txtBxs[row, 0].Text;
+                q = this.matr.A[row, 0].CopyFr;
                 q = (fr - q) / h;
                 switch (poryadok)
                 {
                     case 1:
-                        l1.FractTxt = this.txtBxs[row, 2].Text;
+                        l1 = this.matr.A[row, 2].CopyFr;
                         rez = h.Invert() * (l1);
                         break;
                     case 2:
-                        l1.FractTxt = this.txtBxs[row, 2].Text;
-                        l2.FractTxt = this.txtBxs[row, 3].Text;
+                        l1 = this.matr.A[row, 2].CopyFr;
+                        l2 = this.matr.A[row, 3].CopyFr;
                         rez = h.Invert() * (l1 + l2 * (2 * q - 1) / 2);
                         break;
                     case 3:
-                        l1.FractTxt = this.txtBxs[row, 2].Text;
-                        l2.FractTxt = this.txtBxs[row, 3].Text;
-                        l3.FractTxt = this.txtBxs[row, 4].Text;
+                        l1 = this.matr.A[row, 2].CopyFr;
+                        l2 = this.matr.A[row, 3].CopyFr;
+                        l3 = this.matr.A[row, 4].CopyFr;
                         rez = h.Invert() * (l1 + l2 * (2 * q - 1) / 2 + l3* (3 * q.Power(2) - 6 * q + 2) / 6);
                         break;
                     case 4:
-                        l1.FractTxt = this.txtBxs[row, 2].Text;
-                        l2.FractTxt = this.txtBxs[row, 3].Text;
-                        l3.FractTxt = this.txtBxs[row, 4].Text;
-                        l4.FractTxt = this.txtBxs[row, 5].Text;
+                        l1 = this.matr.A[row, 2].CopyFr;
+                        l2 = this.matr.A[row, 3].CopyFr;
+                        l3 = this.matr.A[row, 4].CopyFr;
+                        l4 = this.matr.A[row, 5].CopyFr;
                         rez = h.Invert() * (l1 + l2 * (2 * q - 1) / 2 + l3 * (3 * q.Power(2) - 6 * q + 2) / 6 + l4 * (2 * q.Power(3) - 9 * q.Power(2) + 11 * q - 3) / 12);
                         break;
                     case 5:
-                        l1.FractTxt = this.txtBxs[row, 2].Text;
-                        l2.FractTxt = this.txtBxs[row, 3].Text;
-                        l3.FractTxt = this.txtBxs[row, 4].Text;
-                        l4.FractTxt = this.txtBxs[row, 5].Text;
-                        l5.FractTxt = this.txtBxs[row, 6].Text;
+                        l1 = this.matr.A[row, 2].CopyFr;
+                        l2 = this.matr.A[row, 3].CopyFr;
+                        l3 = this.matr.A[row, 4].CopyFr;
+                        l4 = this.matr.A[row, 5].CopyFr;
+                        l5 = this.matr.A[row, 6].CopyFr;
                         rez = h.Invert() * (l1 + l2 * (2 * q - 1) / 2 + l3 * (3 * q.Power(2) - 6 * q + 2) / 6 + l4 * (2 * q.Power(3) - 9 * q.Power(2) + 11 * q - 3) / 12 + l5 * (5 * q.Power(4) - 40 * q.Power(3) + 105 * q.Power(2) - 100 * q + 24) / 120);
                         break;
                     default:
@@ -618,31 +615,31 @@ namespace WpfApp1
                 Fraction q = new Fraction();
                 Fraction l = new Fraction();
                 Fraction h = new Fraction();
-                h.FractTxt = this.txtBxs[1, 0].Text;
-                q.FractTxt = this.txtBxs[2, 0].Text;
+                h = this.matr.A[1, 0].CopyFr;
+                q = this.matr.A[2, 0].CopyFr;
                 h = q - h;
-                q.FractTxt = this.txtBxs[row, 0].Text;
+                q = this.matr.A[row, 0].CopyFr;
                 q = (fr - q) / h;
                 switch (poryadok)
                 {
                     case 1:
-                        l.FractTxt = this.txtBxs[row, 3].Text;
+                        l = this.matr.A[row, 3].CopyFr;
                         rez = h.Invert() * l * (2 * q - 1) / 2;
                         break;
                     case 2:                        
-                        l.FractTxt = this.txtBxs[row, 4].Text;
+                        l = this.matr.A[row, 4].CopyFr;
                         rez = h.Invert() * l * (3 * q.Power(2) - 6 * q + 2) / 6;
                         break;
                     case 3:                        
-                        l.FractTxt = this.txtBxs[row, 5].Text;
+                        l = this.matr.A[row, 5].CopyFr;
                         rez = h.Invert() * l * (2 * q.Power(3) - 9 * q.Power(2) + 11 * q - 3) / 12;
                         break;
                     case 4:
-                        l.FractTxt = this.txtBxs[row, 6].Text;//возможна ошибка
+                        l = this.matr.A[row, 6].CopyFr;//возможна ошибка
                         rez = h.Invert() * l * (5 * q.Power(4) - 40 * q.Power(3) + 105 * q.Power(2) - 100 * q + 24)/ 120;
                         break;
                     case 5:                       
-                        l.FractTxt = this.txtBxs[row, 7].Text;//возможна ошибка
+                        l = this.matr.A[row, 7].CopyFr;//возможна ошибка
                         rez = h.Invert() * l * GetPolyNewtonDiff1Val(fr, poryadok, row) / 720;//доделать
                         break;
                     default:
@@ -675,41 +672,41 @@ namespace WpfApp1
                 Fraction l4 = new Fraction();
                 Fraction l5 = new Fraction();
                 Fraction h = new Fraction();
-                m.FractTxt = this.txtBxs[1, 0].Text;
-                k.FractTxt = this.txtBxs[2, 0].Text;
+                m = this.matr.A[1, 0].CopyFr;
+                k = this.matr.A[2, 0].CopyFr;
                 h = k - m;
-                k.FractTxt = this.txtBxs[row, 0].Text;
+                k = this.matr.A[row, 0].CopyFr;
                 q = (fr - k) / h;
                 switch (poryadok)
                 {
                     case 1:
-                        l1.FractTxt = this.txtBxs[row, 2].Text;
+                        l1 = this.matr.A[row, 2].CopyFr;
                         rez = l1;
                         break;
                     case 2:
-                        l1.FractTxt = this.txtBxs[row, 2].Text;
-                        l2.FractTxt = this.txtBxs[row, 3].Text;
+                        l1 = this.matr.A[row, 2].CopyFr;
+                        l2 = this.matr.A[row, 3].CopyFr;
                         rez = h.Invert() * (l1 + l2 * (q * 2 - 1) / MyFuncs.factorial(2));
                         break;
                     case 3:
-                        l1.FractTxt = this.txtBxs[row, 2].Text;
-                        l2.FractTxt = this.txtBxs[row, 3].Text;
-                        l3.FractTxt = this.txtBxs[row, 4].Text;
+                        l1 = this.matr.A[row, 2].CopyFr;
+                        l2 = this.matr.A[row, 3].CopyFr;
+                        l3 = this.matr.A[row, 4].CopyFr;
                         rez = h.Invert().Power(2) * (l2 + l3 * (q - 1));
                         break;
                     case 4:
-                        l1.FractTxt = this.txtBxs[row, 2].Text;
-                        l2.FractTxt = this.txtBxs[row, 3].Text;
-                        l3.FractTxt = this.txtBxs[row, 4].Text;
-                        l4.FractTxt = this.txtBxs[row, 5].Text;
+                        l1 = this.matr.A[row, 2].CopyFr;
+                        l2 = this.matr.A[row, 3].CopyFr;
+                        l3 = this.matr.A[row, 4].CopyFr;
+                        l4 = this.matr.A[row, 5].CopyFr;
                         rez = h.Invert().Power(2) * (l2 + l3 * (q - 1) + l4 * (6 * q.Power(2) - 18 * q + 11) / 12);
                         break;
                     case 5:
-                        l1.FractTxt = this.txtBxs[row, 2].Text;
-                        l2.FractTxt = this.txtBxs[row, 3].Text;
-                        l3.FractTxt = this.txtBxs[row, 4].Text;
-                        l4.FractTxt = this.txtBxs[row, 5].Text;
-                        l5.FractTxt = this.txtBxs[row, 6].Text;
+                        l1 = this.matr.A[row, 2].CopyFr;
+                        l2 = this.matr.A[row, 3].CopyFr;
+                        l3 = this.matr.A[row, 4].CopyFr;
+                        l4 = this.matr.A[row, 5].CopyFr;
+                        l5 = this.matr.A[row, 6].CopyFr;
                         rez = h.Invert().Power(2) * (l2 + l3 * (q - 1) + l4 * (6 * q.Power(2) - 18 * q + 11) / 12 + l5 * (2 * q.Power(3) - 12 * q.Power(2) + 21 * q - 10) / 12);
                         break;
                     default:
@@ -740,31 +737,31 @@ namespace WpfApp1
                 Fraction q = new Fraction();
                 Fraction l = new Fraction();
                 Fraction h = new Fraction();
-                h.FractTxt = this.txtBxs[1, 0].Text;
-                q.FractTxt = this.txtBxs[2, 0].Text;
+                h = this.matr.A[1, 0].CopyFr;
+                q = this.matr.A[2, 0].CopyFr;
                 h = q - h;
-                q.FractTxt = this.txtBxs[row, 0].Text;
+                q = this.matr.A[row, 0].CopyFr;
                 q = (fr - q) / h;
                 switch (poryadok)
                 {
                     case 1:
-                        l.FractTxt = this.txtBxs[row, 3].Text;
+                        l = this.matr.A[row, 3].CopyFr;
                         rez = h.Invert().Power(2) * l;
                         break;
                     case 2:
-                        l.FractTxt = this.txtBxs[row, 4].Text;
+                        l = this.matr.A[row, 4].CopyFr;
                         rez = h.Invert().Power(2) * l * (q - 1);
                         break;
                     case 3:
-                        l.FractTxt = this.txtBxs[row, 5].Text;
+                        l = this.matr.A[row, 5].CopyFr;
                         rez = h.Invert().Power(2) * l * (6 * q.Power(2) - 18 * q + 11) / 12;
                         break;
                     case 4:
-                        l.FractTxt = this.txtBxs[row, 6].Text;//возможна ошибка
+                        l = this.matr.A[row, 6].CopyFr;//возможна ошибка
                         rez = h.Invert().Power(2) * l * (2 * q.Power(3) - 12 * q.Power(2) + 21 * q - 10) / 12;
                         break;
                     case 5:
-                        l.FractTxt = this.txtBxs[row, 7].Text;//возможна ошибка
+                        l = this.matr.A[row, 7].CopyFr;//возможна ошибка
                         rez = h.Invert().Power(2) * l * GetPolyNewtonDiff1Val(fr, poryadok, row) / 720;//доделать
                         break;
                     default:
@@ -824,18 +821,18 @@ namespace WpfApp1
                 {
                     if (i != g)
                     {
-                        l.FractTxt = this.txtBxs[g, 0].Text;
+                        l = this.matr.A[g, 0].CopyFr;
                         m *= (fr - l);
                     }
                 }
-                n.FractTxt = this.txtBxs[i, 1].Text;
+                n = this.matr.A[i, 1].CopyFr;
                 m *= n;
                 for (int g = 1; g < this.NRow; g++)
                 {
                     if (i != g)
                     {
-                        n.FractTxt = this.txtBxs[i, 0].Text;
-                        l.FractTxt = this.txtBxs[g, 0].Text;
+                        n = this.matr.A[i, 0].CopyFr;
+                        l = this.matr.A[g, 0].CopyFr;
                         n -= l;
                         k *= n;
                     }

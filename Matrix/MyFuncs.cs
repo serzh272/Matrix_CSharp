@@ -12,7 +12,7 @@ namespace WpfApp1
 {
     static class MyFuncs
     {
-        public static long factorial(int n) //определение функци для вычисления факториала
+        public static long factorial(int n) //определение функции для вычисления факториала
         {
             long fc;
             fc = 1;

@@ -12,20 +12,17 @@ namespace WpfApp1
     {
         protected int nRow, nCol;
         public Fraction[,] A;
-        public double[,] Ad;
         public Matr()
         {
             this.nRow = 3;
             this.nCol = 3;
             this.A = new Fraction[this.nRow, this.nCol];
-            this.Ad = new double[this.nRow, this.nCol];
 
             for (int i = 0; i < nRow; i++)
             {
                 for (int j = 0; j < nCol; j++)
                 {
                     this.A[i, j] = new Fraction(); //инициализация элементов матрицы нулями
-                    this.Ad[i, j] = 0;
                 }
             }
         }
@@ -35,23 +32,11 @@ namespace WpfApp1
             this.nRow = nRow;
             this.nCol = nCol;
             this.A = new Fraction[this.nRow, this.nCol];
-            this.Ad = new double[this.nRow, this.nCol];
             for (int i = 0; i < nRow; i++)
             {
                 for (int j = 0; j < nCol; j++)
                 {
                     this.A[i, j] = new Fraction(); //инициализация элементов матрицы нулями
-                    this.Ad[i, j] = 0;
-                }
-            }
-        }
-        protected void toDbl()
-        {
-            for (int i = 0; i < nRow; i++)
-            {
-                for (int j = 0; j < nCol; j++)
-                {
-                    this.Ad[i, j] = this.A[i,j].ToDouble();
                 }
             }
         }
@@ -65,7 +50,6 @@ namespace WpfApp1
                 for (int j = 0; j < nC; j++)
                 {
                     rez.A[i, j] = this.A[i, j].CopyFr;
-                    rez.Ad[i, j] = this.Ad[i, j];
                 }
             }
             return rez;
@@ -100,19 +84,16 @@ namespace WpfApp1
                 for (int j = 0; j < this.nCol; j++)
                 {
                    A2[i, j] = this.A[i, j].CopyFr;
-                   Ad2[i, j] = this.Ad[i, j];
                 }
             }
             A = A2;
             A2 = null;
-            Ad = Ad2;
             Ad2 = null;
             for (int j = this.nCol; j < this.nCol + nC; j++)
             {
                 for (int i = 0; i < this.nRow; i++)
                 {
                     A[i, j] = new Fraction();
-                    Ad[i, j] = 0;
                 }
             }
             this.nCol += nC;
@@ -131,19 +112,16 @@ namespace WpfApp1
                 for (int j = 0; j < this.nCol; j++)
                 {
                     A2[i, j] = this.A[i, j].CopyFr;
-                    Ad2[i, j] = this.Ad[i, j];
                 }
             }
             A = A2;
             A2 = null;
-            Ad = Ad2;
             Ad2 = null;
             for (int j = 0; j < this.nCol; j++)
             {
                 for (int i = this.nRow; i < this.nRow + nR; i++)
                 {
                     A[i, j] = new Fraction();
-                    Ad[i, j] = 0;
                 }
             }
             this.nRow += nR;
@@ -162,12 +140,10 @@ namespace WpfApp1
                 for (int j = 0; j < this.nCol - nC; j++)
                 {
                     A2[i, j] = this.A[i, j].CopyFr;
-                    Ad2[i, j] = this.Ad[i, j];
                 }
             }            
             A = A2;
             A2 = null;
-            Ad = Ad2;
             Ad2 = null;
             this.nCol -= nC;
         }
@@ -185,12 +161,10 @@ namespace WpfApp1
                 for (int j = 0; j < this.nCol; j++)
                 {
                     A2[i, j] = this.A[i, j].CopyFr;
-                    Ad2[i, j] = this.Ad[i, j];
                 }
             }
             A = A2;
             A2 = null;
-            Ad = Ad2;
             Ad2 = null;
             this.nRow -= nR;
         }
@@ -204,7 +178,6 @@ namespace WpfApp1
                 this.A[r1, j] = this.A[r2, j];
                 this.A[r2, j] = f;
             }
-            this.toDbl();
         }
 
         public void swapCols(int c1, int c2)
@@ -216,7 +189,6 @@ namespace WpfApp1
                 this.A[i, c1] = this.A[i, c2];
                 this.A[i, c2] = f;
             }
-            this.toDbl();
         }
 
         public void multRows(int r1, int r2, Fraction fr)
@@ -225,7 +197,6 @@ namespace WpfApp1
             {
                 this.A[r2, j] -= this.A[r1, j] * fr;
             }
-            this.toDbl();
         }
 
         public void multCols(int c1, int c2, Fraction fr)
@@ -235,7 +206,6 @@ namespace WpfApp1
 
                 this.A[i, c2] = this.A[i, c2] - this.A[i, c1] * fr;
             }
-            this.toDbl();
         }
 
         public Matr CopyMatr()
@@ -245,9 +215,7 @@ namespace WpfApp1
             {
                 for (int j = 0; j < this.nCol; j++)
                 {
-                    rez.A[i, j] = this.A[i, j].CopyFr;
-                    rez.Ad[i, j] = this.Ad[i, j];
-                    
+                    rez.A[i, j] = this.A[i, j].CopyFr;                    
                 }
             }
             return rez;
@@ -261,7 +229,6 @@ namespace WpfApp1
                 for (int j = 0; j < m.nCol; j++)
                 {
                     rez.A[0, j] = m.A[Row, j].CopyFr;
-                    rez.Ad[0, j] = m.Ad[Row, j];
                 }
                 return rez;
             }
@@ -279,7 +246,6 @@ namespace WpfApp1
                 for (int i = 0; i < m.nRow; i++)
                 {
                     rez.A[i, 0] = m.A[i, Col].CopyFr;
-                    rez.Ad[i, 0] = m.Ad[i, Col];
                 }
                 return rez;
             }
@@ -301,7 +267,6 @@ namespace WpfApp1
                         for (int g = 0; g < m2.nRow; g++)
                         {
                             rez.A[i, j] += m1.A[i, g] * m2.A[g, j];
-                            rez.Ad[i, j] += m1.Ad[i, g] * m2.Ad[g, j];
                         }
                     }
                 }
@@ -323,7 +288,6 @@ namespace WpfApp1
                 for (int j = 0; j < m1.nCol; j++)
                 {
                     rez.A[i, j] = m1.A[i, j] * fr;
-                    rez.Ad[i, j] = m1.Ad[i, j] * fr.ToDouble();
                 }
             }
             
@@ -339,7 +303,6 @@ namespace WpfApp1
                 for (int j = 0; j < m1.nCol; j++)
                 {
                     rez.A[i, j] = m1.A[i, j] * fr;
-                    rez.Ad[i, j] = m1.Ad[i, j] * fr.ToDouble();
                 }
             }
             return rez;
@@ -353,7 +316,6 @@ namespace WpfApp1
                 for (int j = 0; j < m1.nCol; j++)
                 {
                     rez.A[i, j] = m1.A[i, j] / fr;
-                    rez.Ad[i, j] = m1.Ad[i, j] / fr.ToDouble();
                 }
             }
 
@@ -372,7 +334,6 @@ namespace WpfApp1
                 for (int j = 0; j < m2.nCol; j++)
                 {
                     rez.A[i,j] = m1.A[i,j] + m2.A[i,j];
-                    rez.Ad[i,j] = m1.Ad[i,j] + m2.Ad[i,j];
                 }
             }
             return rez;
@@ -390,7 +351,6 @@ namespace WpfApp1
                 for (int j = 0; j < m2.nCol; j++)
                 {
                     rez.A[i,j] = m1.A[i,j] - m2.A[i,j];
-                    rez.Ad[i,j] = m1.Ad[i,j] - m2.Ad[i,j];
                 }
             }
             return rez;

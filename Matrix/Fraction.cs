@@ -208,13 +208,8 @@ namespace WpfApp1
         public static Fraction operator *(Fraction fr1, long n) //перегрузка оператора умножения
         {
             Fraction i = new Fraction(fr1.numerator, fr1.denominator); ;
-            Fraction j = new Fraction(n, 1); ;
-            long l = j.numerator;
-            j.numerator = i.numerator;
-            i.numerator = l;
-            j.Normalize();
-            i.Normalize();
-            return new Fraction(j.numerator * i.numerator, j.denominator * i.denominator);
+            Fraction j = new Fraction(n, 1); ;            
+            return i*j;
         }
 
         public static Fraction operator *(long n, Fraction fr1) //перегрузка оператора умножения

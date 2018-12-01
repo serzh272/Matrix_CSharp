@@ -79,7 +79,6 @@ namespace WpfApp1
                 }
                 
             }
-            mFr.toDbl();
             return mFr;
         }
 
@@ -150,13 +149,10 @@ namespace WpfApp1
                 switch (type)
                 {
                     case 1:
-                        x.toDbl();
                         return x;
                     case 2:
-                        b.toDbl();
                         return b;
                     default:
-                        c.toDbl();
                         return c;
                 }
             }
@@ -178,7 +174,6 @@ namespace WpfApp1
                     }
                 }
             }
-            this.toDbl();
         }
 
         public Matr InverseIterMetod(Fraction lambda, Matr x0)
@@ -205,7 +200,6 @@ namespace WpfApp1
                     rez.A[i, j] = this.A[i, j].CopyFr;
                 }
             }
-            rez.toDbl();
             return rez;
         }
 
@@ -294,7 +288,6 @@ namespace WpfApp1
                         }
                     }
                 }
-                rez.toDbl();
                 return rez;
             }
             else
@@ -313,7 +306,6 @@ namespace WpfApp1
                     rez.A[i, j] = m1.A[i, j] * fr;
                 }
             }
-            rez.toDbl();
             return rez;
         }
 
@@ -328,7 +320,6 @@ namespace WpfApp1
                     rez.A[i, j] = m1.A[i, j] * fr;
                 }
             }
-            rez.toDbl();
             return rez;
         }
 
@@ -346,7 +337,6 @@ namespace WpfApp1
                     rez.A[i, j] = m1.A[i, j] - m2.A[i, j];
                 }
             }
-            rez.toDbl();
             return rez;
         }
     }

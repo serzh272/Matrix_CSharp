@@ -58,7 +58,7 @@ namespace WpfApp1
                     txtBx.Name = g.Name + "_txtBx" + i + "_" + j;
                     if (this.isDouble)
                     {
-                        txtBx.Text = "" + matr.Ad[i-1, j-1];
+                        txtBx.Text = "" + matr.A[i-1, j-1].ToDouble();
                     }
                     else
                     {
@@ -393,7 +393,6 @@ namespace WpfApp1
                 for (int j = 0; j < this.nCol; j++)
                 {
                     m.A[i, j].FractTxt = this.txtBxs[i, j].Text;
-                    m.Ad[i, j] = m.A[i, j].ToDouble();
                 }
             }
             return m;
@@ -406,7 +405,6 @@ namespace WpfApp1
                 for (int j = 0; j < this.nCol; j++)
                 {
                     this.matr.A[i, j].FractTxt = MyFuncs.convertToFract(this.txtBxs[i, j].Text);
-                    this.matr.Ad[i, j] = this.matr.A[i, j].ToDouble();
                 }
             }
         }       
@@ -441,7 +439,7 @@ namespace WpfApp1
                     txtBx.Name = g.Name + "_txtBx" + i + "_" + j;
                     if (this.isDouble)
                     {
-                        txtBx.Text = "" + this.matr.Ad[i - 1, j - 1];
+                        txtBx.Text = "" + this.matr.A[i - 1, j - 1].ToDouble();
                     }
                     else
                     {

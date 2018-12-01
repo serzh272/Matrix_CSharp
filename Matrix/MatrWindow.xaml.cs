@@ -347,7 +347,7 @@ namespace WpfApp1
             myM2.Redraw();
             try
             {
-                SystUrav s = new SystUrav(myM1.matr.toQuadMatr(), myM2.matr.toQuadMatr());
+                SystUrav s = new SystUrav(myM1.matr.toQuadMatr(), myM2.matr);
                 Matr m = s.GaussRoots();
                 RezWnd = new RezWindow();
                 RezWnd.Owner = this;
@@ -459,7 +459,7 @@ namespace WpfApp1
             myM2.MatrWrite();
             try
             {
-                SystUrav s = new SystUrav(myM1.matr.toQuadMatr(), myM2.matr.toQuadMatr());
+                SystUrav s = new SystUrav(myM1.matr.toQuadMatr(), myM2.matr);
                 Fraction ep = new Fraction();
                 ep.FractTxt = MyFuncs.convertToFract(eps.Text);
                 Matr m = s.SimpleIterRoots(ep,int.Parse(SimpleIterTxt.Text));
@@ -468,6 +468,7 @@ namespace WpfApp1
                 RezWnd.Title = "Корни системы уравнений";
                 myMRez = new MyMatr(ref RezWnd.MatrRezGrid, ref m, 5);
                 myMRez.isDouble = (bool)isDbl.IsChecked;
+                myMRez.Redraw();
                 RezWnd.btnCopyTo1.Visibility = Visibility.Hidden;
                 RezWnd.btnCopyTo2.Visibility = Visibility.Hidden;
                 TextBox[,] b = myMRez.GetMatrBx();

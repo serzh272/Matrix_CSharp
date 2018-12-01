@@ -104,8 +104,7 @@ namespace WpfApp1
             else
             {
                 MessageBox.Show("Заполните все значения X и Y!");
-            }
-            
+            }            
         }
 
         private void tblIspRow_TextChanged(object sender, TextChangedEventArgs e)
